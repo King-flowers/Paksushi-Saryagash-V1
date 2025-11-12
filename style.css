@@ -150,30 +150,43 @@ main{padding-top:82px;}
   .modal-grid{ grid-template-columns: 1fr; }
 }
 /* 🔹 Мобильная адаптация верхних кнопок (компактный вид) */
-@media (max-width: 600px) {
+/* 🔹 Компактная горизонтальная навигация под логотипом */
+@media (max-width: 768px) {
   .topbar {
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    padding: 8px 10px;
-    gap: 6px;
+    padding: 8px 12px;
   }
 
   .brand {
-    font-size: 16px;
+    font-size: 17px;
+    margin-bottom: 6px;
   }
 
   .tabs {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-    position: absolute;
-    right: 8px;
-    top: 48px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    width: 100%;
+    padding-bottom: 4px;
+    scrollbar-width: none; /* скрыть скролл */
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .tabs a {
-    font-size: 13px;
-    padding: 5px 10px;
-    border-radius: 20px;
+    flex: 0 0 auto;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    background: #f8f8f8;
+  }
+
+  .tabs a:hover {
+    background: #eee;
   }
 }
