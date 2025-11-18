@@ -32,12 +32,13 @@
           <input id="set-search" type="text" placeholder="Поиск по названию или составу…" />
           <button id="search-clear" class="clear" title="Очистить">✕</button>
         </div>
-        <div class="chips" id="chips">
-          <button class="chip" data-tag="sushi-heavy">Много суши</button>
-          <button class="chip" data-tag="pizza-heavy">Много пиццы</button>
-          <button class="chip" data-tag="balanced">Сбалансированные</button>
-          <button class="chip" data-tag="spicy">Острые</button>
+        <div id="chips" class="chips">
+          <div class="chip active" data-tag="all">Все</div>
+          <div class="chip" data-tag="popular">Популярные</div>
+          <div class="chip" data-tag="big">Большие</div>
+          <div class="chip" data-tag="small">Малые</div>
         </div>
+
       </div>
 
       <div id="sets-list" class="cards two-col"></div>
@@ -108,5 +109,15 @@
   </div>
 
   <script src="script.js"></script>
+  <!-- FULLSCREEN IMAGE VIEW -->
+  <!-- 🔍 FULLSCREEN IMAGE VIEW -->
+  <div id="fs-view" class="fs-view">
+      <div class="fs-back"></div>
+      <div class="fs-content">
+          <span id="fs-close" class="fs-close">×</span>
+          <img id="fs-img" src="" alt="">
+      </div>
+  </div>
+
 </body>
 </html>
