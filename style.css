@@ -31,16 +31,18 @@ body{
   padding:12px 16px; gap:16px;
 }
 .brand{font-weight:800; color:var(--green); font-size:18px;}
-.tabs{display:flex; flex-wrap:wrap; gap:8px;}
-.tabs a{
-  text-decoration:none; color:#222;
-  padding:8px 12px; border-radius:999px; background:#f7f7f7;
-  transition: transform .2s ease, background .2s ease;
+.tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:4px;
+  scrollbar-width:none; /* Firefox */
 }
-.tabs a:hover{
-  background:#eee;
-  transform: translateY(-3px);
+
+.tabs::-webkit-scrollbar{
+  display:none; /* Chrome/Safari */
 }
+
 
 /* === MAIN === */
 main{padding-top:82px;}
@@ -281,4 +283,12 @@ main{padding-top:82px;}
   color:#fff;
   cursor:pointer;
   font-weight:bold;
+}
+@media (max-width: 480px){
+  .tabs{
+    padding-right:10px;
+  }
+  .tabs a{
+    white-space:nowrap; /* табтар сөздің бөлініп кетпеу үшін */
+  }
 }
