@@ -249,7 +249,7 @@ const DATA = {
       slug:'alma-arasan',
       category:'small',
       popular:false,
-      img:'images/sets/Set-Almaarasan.jpg',
+      img:'images/sets/Set-AlmaArasan.jpg',
       price:8990,
       short:'🍣 40 шт суши + 🌭 корн дог + 🍗 нагетсы + 🍕 4 сезона + 🍟 фри',
       desc:'🍣 Цезарь — 20 шт\n🍣 Америка — 20 шт\n\n🌭 Корн дог — 1 шт\n🍗 Нагетсы — 8 шт\n\n🍕 4 сезона — 1 шт\n\n🍟 Фри — 1 шт'
@@ -303,7 +303,7 @@ const DATA = {
       slug:'4you',
       category:'small',
       popular:false,
-      img:'images/sets/Set-4You.jpg',
+      img:'images/sets/Set-4you.jpg',
       price:7700,
       short:'🍣 40 шт суши + 🍘 саше + 🍗 нагетсы + 🟡 шарики',
       desc:'🍣 Филадельфия — 10 шт\n🍣 Сырный ролл — 10 шт\n🍣 Цезарь — 10 шт\n🍣 Америка с лососем — 10 шт\n\n🍘 Саше — 4 шт\n\n🍗 Нагетсы — 8 шт\n\n🟡 Шарики — 1 шт'
@@ -460,7 +460,7 @@ const DATA = {
       img:'images/sets/Set-Rio.jpg',
       price:7990,
       short:'🍣 50 шт суши + 🍕 пеперони',
-      desc:'🍣 Филадельфия — 10 шт\n🍣 Америка темпура — 10 шт\n🍣 Цезарь — 10 шт\n🍣 Цезарь запечённый — 10 шт\n🍣 Капа маки — 10 шт\n🍣 Америка - 10 шт \n\n🍕 Пеперони — 1 шт'
+      desc:'🍣 Филадельфия — 10 шт\n🍣 Америка темпура — 10 шт\n🍣 Цезарь — 10 шт\n🍣 Цезарь запечённый — 10 шт\n🍣 Капа маки — 10 шт\n\n🍣 Америка - 10 шт \n\n🍕 Пеперони — 1 шт'
     },
 
 
@@ -502,7 +502,7 @@ const DATA = {
       slug:'chetam',
       category:'small',
       popular:false,
-      img:'images/sets/Set-CheTam.jpg',
+      img:'images/sets/Set-Chetam.jpg',
       price:9490,
       short:'🍣 60 шт суши + 🍕 маргарита + 🍟 фри + 🥤 кола',
       desc:'🍣 Филадельфия — 10 шт\n🍣 Америка темпура — 10 шт\n🍣 Цезарь темп — 10 шт\n🍣 Цезарь запечённый — 10 шт\n🍣 Капа маки — 10 шт\n🍣 Бонито — 10 шт\n\n🍕 Маргарита — 1 шт\n🍟 Фри — 1 шт\n🥤 Кола — 1 л'
@@ -527,7 +527,7 @@ const DATA = {
       img:'images/sets/Set-Velikolepni.jpg',
       price:15990,
       short:'🍣 100 шт суши + 🍕 3 пицца',
-      desc:'🍣 Филадельфия — 20 шт\n🍣 Калифорния — 10 шт\n🍣 Инь Янь — 10 шт\n🍣 Темпура — 30 шт\n🍣 Цезарь запечённый — 10 шт\n🍣 Цезарь — 20 шт\n\n🍕 Пеперони — 1 шт\n🍕 Маргарита — 1 шт\n🍕 4 сезона — 1 шт'
+      desc:'🍣 Филадельфия — 20 шт\n🍣 Калифорния — 10 шт\n🍣 Инь Янь — 10 шт\n🍣 Темпура — 30 шт\n🍣 Цезарь запечённый — 10 шт\n\n🍣 Цезарь — 20 шт\n🍕 Пеперони — 1 шт\n🍕 Маргарита — 1 шт\n🍕 4 сезона — 1 шт'
     },
 
     {
@@ -911,75 +911,65 @@ function kzt(n){ return new Intl.NumberFormat('ru-RU').format(n) + " ₸"; }
 
 /* ===== Рендер карточек ===== */
 function makeCard(item, kind){
-  const wrap = document.createElement('div');
-  wrap.className = 'card';
+  const card = document.createElement('div');
+  card.className = 'card';
 
-  /* === IMAGE === */
+  // PHOTO
   const img = document.createElement('img');
   img.className = 'img';
-  img.src = item.img || 'images/placeholder.jpg';
-  img.alt = item.name || 'Блюдо';
-  wrap.appendChild(img);
+  img.src = item.img;
+  card.appendChild(img);
 
-  /* FULLSCREEN OPEN */
-  img.addEventListener('click', (e) => {
+  img.onclick = e => {
     e.stopPropagation();
     openFullscreen(item.img);
-  });
+  };
 
-  /* PRICE */
+  // CONTENT BLOCK
+  const content = document.createElement('div');
+  content.className = 'card-content';
+
+  // PRICE
   const price = document.createElement('div');
-  price.className = 'price';
+  price.className = 'card-price';
   price.textContent = kzt(item.price);
-  wrap.appendChild(price);
+  content.appendChild(price);
 
-  /* INFO */
-  const info = document.createElement('div');
-  info.className = 'info';
-
+  // TITLE
   const title = document.createElement('div');
-  title.className = 'title';
+  title.className = 'card-title';
   title.textContent = item.name;
-  info.appendChild(title);
+  content.appendChild(title);
 
+  // DESC
   if(item.short){
-    const short = document.createElement('div');
-    short.className = 'desc';
-    short.textContent = item.short;
-    info.appendChild(short);
+    const desc = document.createElement('div');
+    desc.className = 'card-desc';
+    desc.textContent = item.short;
+    content.appendChild(desc);
   }
 
-  const actions = document.createElement('div');
-  actions.className = 'actions';
-
+  // BUTTON
   const btn = document.createElement('button');
-  const isSet = (kind === 'sets');
-  btn.className = 'btn';
+  btn.className = 'card-btn';
+  btn.textContent = "Заказать";
 
-  btn.textContent = isSet
-    ? `Заказать сет «${item.name.replace(/^Сет\s+/,'')}»`
-    : `Заказать «${item.name}»`;
-
-  btn.addEventListener('click', (e) => {
+  btn.onclick = e => {
     e.stopPropagation();
-    const text = isSet
-      ? `Здравствуйте, я хочу заказать сет "${item.name.replace(/^Сет\s+/,'')}" `
-      : `Здравствуйте, хочу заказать "${item.name}"`;
+    const text = `Здравствуйте, я хочу заказать "${item.name}"`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`);
+  };
 
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
-  });
+  content.appendChild(btn);
 
-  actions.appendChild(btn);
-  info.appendChild(actions);
+  card.appendChild(content);
 
-  /* === MODAL OPEN === */
-  wrap.addEventListener('click', () => openModal(item, isSet));
+  // OPEN MODAL
+  card.onclick = () => openModal(item, kind === 'sets');
 
-  wrap.appendChild(info);
-
-  return wrap;
+  return card;
 }
+
 
 
 function renderList(key, rootId, items){
